@@ -24,5 +24,6 @@ class AppServiceProvider extends ServiceProvider
   public function boot()
   {
     require_once __DIR__ . '/../Helpers/ResponseFormatter.php';
+    require_once __DIR__ . '/../Helpers/helpers.php';
   }
 }

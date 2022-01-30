@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseFormatter;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -19,11 +19,7 @@ class RegisterController extends Controller
   {
     try {
       $data = $request->all();
-      $validator = Validator::make($data, [
-        'nik' => 'required|max:16|min:16|regex:/^[0-9]*$/',
-        'role' => 'required',
-        'password' => 'required|max:6|min:6'
-      ]);
+      $validator = rules($data, RegisterRequest::getRules());
 
       /* check validation */
       if ($validator->fails()) {
